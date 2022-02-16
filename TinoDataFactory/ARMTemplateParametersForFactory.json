@@ -11,11 +11,20 @@
 		"CloudStreamingSqlDatabase_connectionString": {
 			"value": ""
 		},
+		"FourthCoffeeConnection_password": {
+			"value": ""
+		},
 		"VanArsdelLtdSqlServerConnection_connectionString": {
 			"value": ""
 		},
 		"tinogen2storageaccConnection_accountKey": {
 			"value": ""
+		},
+		"FourthCoffeeConnection_properties_typeProperties_host": {
+			"value": "C:\\Rentals"
+		},
+		"FourthCoffeeConnection_properties_typeProperties_userId": {
+			"value": "southridge"
 		},
 		"tinogen2storageaccConnection_properties_typeProperties_url": {
 			"value": "https://tinogen2storageacc.dfs.core.windows.net"

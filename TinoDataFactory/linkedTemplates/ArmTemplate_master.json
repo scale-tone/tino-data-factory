@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CloudStreamingSqlDatabase'"
 		},
+		"FourthCoffeeConnection_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FourthCoffeeConnection'"
+		},
 		"VanArsdelLtdSqlServerConnection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'VanArsdelLtdSqlServerConnection'"
@@ -22,6 +26,14 @@
 		"tinogen2storageaccConnection_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'tinogen2storageaccConnection'"
+		},
+		"FourthCoffeeConnection_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Rentals"
+		},
+		"FourthCoffeeConnection_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "southridge"
 		},
 		"tinogen2storageaccConnection_properties_typeProperties_url": {
 			"type": "string",
@@ -63,15 +75,44 @@
 					"tinogen2storageaccConnection_accountKey": {
 						"value": "[parameters('tinogen2storageaccConnection_accountKey')]"
 					},
+					"FourthCoffeeConnection_password": {
+						"value": "[parameters('FourthCoffeeConnection_password')]"
+					},
 					"VanArsdelLtdSqlServerConnection_connectionString": {
 						"value": "[parameters('VanArsdelLtdSqlServerConnection_connectionString')]"
 					},
 					"tinogen2storageaccConnection_properties_typeProperties_url": {
 						"value": "[parameters('tinogen2storageaccConnection_properties_typeProperties_url')]"
+					},
+					"FourthCoffeeConnection_properties_typeProperties_host": {
+						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_host')]"
+					},
+					"FourthCoffeeConnection_properties_typeProperties_userId": {
+						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_userId')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "TinoDataFactory_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'TinoDataFactory_ArmTemplate_0')]"
+			]
 		}
 	]
 }
