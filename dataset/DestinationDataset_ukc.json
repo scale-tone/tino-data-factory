@@ -1,0 +1,24 @@
+{
+	"name": "DestinationDataset_ukc",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tinogen2storageaccConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Transactions.csv",
+				"folderPath": "CloudStreaming",
+				"fileSystem": "southridge-video"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

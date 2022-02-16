@@ -1,0 +1,9 @@
+{
+	"name": "TinoDataFactory",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f539106e-0662-49f4-a3d4-f2fa8e66352b",
+		"tenantId": "240d2831-cdb1-4d59-9f30-c8340ea37391"
+	}
+}
