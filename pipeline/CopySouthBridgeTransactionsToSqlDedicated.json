@@ -33,10 +33,7 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": {
-									"value": "@concat('1-', '$$COLUMNN:1')",
-									"type": "Expression"
-								}
+								"value": "1-$$COLUMNN:1"
 							},
 							{
 								"name": "UniqueCustomerID",
