@@ -1,0 +1,24 @@
+{
+	"name": "Trigger_ppm",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyOnPremRentalsFromVanArsdelLtd",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 5,
+				"startTime": "2022-02-16T16:34:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
