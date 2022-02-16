@@ -33,7 +33,10 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": "1-$$COLUMN:Prop_0"
+								"value": {
+									"value": "@concat('1-','$$COLUMN:Prop_0')",
+									"type": "Expression"
+								}
 							},
 							{
 								"name": "UniqueCustomerID",
