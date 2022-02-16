@@ -33,15 +33,15 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": "$$COLUMN:Prop_0"
+								"value": "1-$$COLUMN:Prop_0"
 							},
 							{
 								"name": "UniqueCustomerID",
-								"value": "$$COLUMN:Prop_1"
+								"value": "1-$$COLUMN:Prop_1"
 							},
 							{
 								"name": "UniqueMovieID",
-								"value": "$$COLUMN:Prop_2"
+								"value": "1-$$COLUMN:Prop_2"
 							}
 						],
 						"storeSettings": {
