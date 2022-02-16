@@ -1,0 +1,187 @@
+{
+	"name": "CopySouthBridgeTransactionsToSqlDedicated",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_yvx",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "southridge-video/CloudStreaming/Transactions.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "tino.Streaming"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "SourceID",
+								"value": "1"
+							},
+							{
+								"name": "UniqueOrderID",
+								"value": "\"$$COLUMN:1\""
+							},
+							{
+								"name": "UniqueMovieID",
+								"value": "\"$$COLUMN:3\""
+							},
+							{
+								"name": "UniqueCustomerID",
+								"value": "\"$$COLUMN:2\""
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": false,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "SqlDWSink",
+						"allowPolyBase": true,
+						"polyBaseSettings": {
+							"rejectValue": 0,
+							"rejectType": "value",
+							"useTypeDefault": true
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "tinogen2storageaccConnection",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "TransactionID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "CustomerID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "MovieID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"type": "DateTime",
+									"format": "yyy-MM-dd HH:mm:ss.fffffff",
+									"ordinal": 4
+								},
+								"sink": {
+									"name": "StreamStart",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"type": "DateTime",
+									"format": "yyy-MM-dd HH:mm:ss.fffffff",
+									"ordinal": 5
+								},
+								"sink": {
+									"name": "StreamEnd",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "SourceID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SourceID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UniqueOrderID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UniqueOrderID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UniqueMovieID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UniqueMovieID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "UniqueCustomerID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UniqueCustomerID",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_yvx",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_yvx",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

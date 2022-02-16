@@ -1,0 +1,57 @@
+{
+	"name": "DestinationDataset_yvx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TinoSynapseAnalyticsConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "UniqueOrderID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UniqueMovieID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "UniqueCustomerID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SourceID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactionID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MovieID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CustomerID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StreamStart",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "StreamEnd",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "tino",
+			"table": "Streaming"
+		}
+	}
+}
