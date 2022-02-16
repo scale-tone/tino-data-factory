@@ -13,8 +13,12 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\tTransactionID as string,\n\t\tCustomerID as string,\n\t\tMovieID as string,\n\t\tStreamStart as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tStreamEnd as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tColumn_6 as string,\n\t\tColumn_7 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1"
+			"transformations": [
+				{
+					"name": "AddUniqueColumns"
+				}
+			],
+			"script": "source(output(\n\t\tTransactionID as string,\n\t\tCustomerID as string,\n\t\tMovieID as string,\n\t\tStreamStart as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tStreamEnd as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tColumn_6 as string,\n\t\tColumn_7 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(UniqueOrderID = concat('1-', TransactionID),\n\t\tUniqueMovieID = concat('1-', MovieID),\n\t\tUniqueCustomerID = concat('1-', CustomerID),\n\t\tSourceID = 1) ~> AddUniqueColumns"
 		}
 	}
 }
