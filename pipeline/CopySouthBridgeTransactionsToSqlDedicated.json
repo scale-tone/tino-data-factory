@@ -33,15 +33,24 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": "\"$$COLUMN:1\""
-							},
-							{
-								"name": "UniqueMovieID",
-								"value": "\"$$COLUMN:3\""
+								"value": {
+									"value": "1-$$COLUMN:1",
+									"type": "Expression"
+								}
 							},
 							{
 								"name": "UniqueCustomerID",
-								"value": "\"$$COLUMN:2\""
+								"value": {
+									"value": "1-$$COLUMN:2",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": "UniqueMovieID",
+								"value": {
+									"value": "1-$$COLUMN:3",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
