@@ -23,7 +23,8 @@
 						"linkedService": {
 							"referenceName": "tinogen2storageaccConnection",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"folderPath": "SouthridgeCloudStreamingTransactionsPipelineStaging"
 					},
 					"compute": {
 						"coreCount": 8,
