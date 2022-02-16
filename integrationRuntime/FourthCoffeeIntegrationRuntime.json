@@ -1,0 +1,6 @@
+{
+	"name": "FourthCoffeeIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
