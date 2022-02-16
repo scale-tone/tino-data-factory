@@ -115,7 +115,7 @@
 							{
 								"source": {
 									"type": "DateTime",
-									"format": "yyy-MM-dd HH:mm:ss.fffffff",
+									"format": "yyyy-MM-dd HH:mm:ss.fffffff",
 									"ordinal": 4
 								},
 								"sink": {
@@ -126,7 +126,7 @@
 							{
 								"source": {
 									"type": "DateTime",
-									"format": "yyy-MM-dd HH:mm:ss.fffffff",
+									"format": "yyyy-MM-dd HH:mm:ss.fffffff",
 									"ordinal": 5
 								},
 								"sink": {
