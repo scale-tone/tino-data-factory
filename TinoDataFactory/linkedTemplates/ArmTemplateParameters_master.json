@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "TinoDataFactory"
+		},
+		"CloudSalesSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"CloudStreamingSqlDatabase_connectionString": {
+			"value": ""
+		},
+		"VanArsdelLtdSqlServerConnection_connectionString": {
+			"value": ""
+		},
+		"tinogen2storageaccConnection_accountKey": {
+			"value": ""
+		},
+		"tinogen2storageaccConnection_properties_typeProperties_url": {
+			"value": "https://tinogen2storageacc.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
