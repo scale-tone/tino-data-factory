@@ -33,7 +33,7 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": "1-$$COLUMNN:1"
+								"value": "$$COLUMNN:1"
 							},
 							{
 								"name": "UniqueCustomerID",
