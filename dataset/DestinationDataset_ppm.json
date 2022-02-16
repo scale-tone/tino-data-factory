@@ -1,0 +1,29 @@
+{
+	"name": "DestinationDataset_ppm",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tinogen2storageaccConnection",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_fileName": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().cw_fileName",
+					"type": "Expression"
+				},
+				"folderPath": "OnPremRentals",
+				"fileSystem": "vanarsdelltd"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
