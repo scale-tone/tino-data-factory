@@ -33,21 +33,15 @@
 							},
 							{
 								"name": "UniqueOrderID",
-								"value": "$$COLUMNN:1"
+								"value": "$$COLUMN:Prop_0"
 							},
 							{
 								"name": "UniqueCustomerID",
-								"value": {
-									"value": "@concat('1-', '$$COLUMNN:2')",
-									"type": "Expression"
-								}
+								"value": "$$COLUMN:Prop_1"
 							},
 							{
 								"name": "UniqueMovieID",
-								"value": {
-									"value": "@concat('1-', '$$COLUMNN:3')",
-									"type": "Expression"
-								}
+								"value": "$$COLUMN:Prop_2"
 							}
 						],
 						"storeSettings": {
