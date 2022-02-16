@@ -34,21 +34,21 @@
 							{
 								"name": "UniqueOrderID",
 								"value": {
-									"value": "1-$$COLUMN:1",
+									"value": "@concat('1-', '$$COLUMNN:1')",
 									"type": "Expression"
 								}
 							},
 							{
 								"name": "UniqueCustomerID",
 								"value": {
-									"value": "1-$$COLUMN:2",
+									"value": "@concat('1-', '$$COLUMNN:2')",
 									"type": "Expression"
 								}
 							},
 							{
 								"name": "UniqueMovieID",
 								"value": {
-									"value": "1-$$COLUMN:3",
+									"value": "@concat('1-', '$$COLUMNN:3')",
 									"type": "Expression"
 								}
 							}
