@@ -13,6 +13,611 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_ehz')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FourthCoffeeConnection",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "FileServerLocation"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ActorID",
+						"type": "String"
+					},
+					{
+						"name": "ActorName",
+						"type": "String"
+					},
+					{
+						"name": "Gender",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_ppm')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VanArsdelLtdSqlServerConnection",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"cw_table": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": {
+						"value": "@dataset().cw_table",
+						"type": "Expression"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopySouthBridgeTransactionsToSqlDedicated')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_yvx",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "southridge-video/CloudStreaming/Transactions.csv"
+							},
+							{
+								"name": "Destination",
+								"value": "tino.Streaming"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "SourceID",
+										"value": "1"
+									},
+									{
+										"name": "UniqueOrderID",
+										"value": {
+											"value": "@concat('1-','$$COLUMN:Prop_0')",
+											"type": "Expression"
+										}
+									},
+									{
+										"name": "UniqueCustomerID",
+										"value": "1-$$COLUMN:Prop_1"
+									},
+									{
+										"name": "UniqueMovieID",
+										"value": "1-$$COLUMN:Prop_2"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 0
+								}
+							},
+							"sink": {
+								"type": "SqlDWSink",
+								"allowPolyBase": true,
+								"polyBaseSettings": {
+									"rejectValue": 0,
+									"rejectType": "value",
+									"useTypeDefault": true
+								}
+							},
+							"enableStaging": true,
+							"stagingSettings": {
+								"linkedServiceName": {
+									"referenceName": "tinogen2storageaccConnection",
+									"type": "LinkedServiceReference"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "TransactionID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "CustomerID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "MovieID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"type": "DateTime",
+											"format": "yyyy-MM-dd HH:mm:ss.fffffff",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "StreamStart",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"type": "DateTime",
+											"format": "yyyy-MM-dd HH:mm:ss.fffffff",
+											"ordinal": 5
+										},
+										"sink": {
+											"name": "StreamEnd",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"name": "SourceID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SourceID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UniqueOrderID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UniqueOrderID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UniqueMovieID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UniqueMovieID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "UniqueCustomerID",
+											"type": "String"
+										},
+										"sink": {
+											"name": "UniqueCustomerID",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_yvx",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_yvx",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SouthridgeCloudStreamingTransactionsDataFlow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SouthridgeCloudStreamingTransactionsCsv",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "AzureSynapseAnalyticsTable1",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "AddUniqueColumns"
+						}
+					],
+					"script": "source(output(\n\t\tTransactionID as string,\n\t\tCustomerID as string,\n\t\tMovieID as string,\n\t\tStreamStart as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tStreamEnd as timestamp 'yyyy-MM-dd HH:mm:ss.SSSSSSS',\n\t\tColumn_6 as string,\n\t\tColumn_7 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> source1\nsource1 derive(UniqueOrderID = concat('1-', TransactionID),\n\t\tUniqueMovieID = concat('1-', MovieID),\n\t\tUniqueCustomerID = concat('1-', CustomerID),\n\t\tSourceID = 1) ~> AddUniqueColumns\nAddUniqueColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tUniqueOrderID as string,\n\t\tUniqueMovieID as string,\n\t\tUniqueCustomerID as string,\n\t\tSourceID as integer,\n\t\tTransactionID as string,\n\t\tMovieID as string,\n\t\tCustomerID as string,\n\t\tStreamStart as timestamp,\n\t\tStreamEnd as timestamp\n\t),\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tstaged: true,\n\tallowCopyCommand: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\terrorHandlingOption: 'stopOnFirstError') ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyOnPremRentalsFromVanArsdelLtd')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach_ppm",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.cw_items",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy_ppm",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [
+										{
+											"name": "Source",
+											"value": "dbo.@{item().source.table}"
+										},
+										{
+											"name": "Destination",
+											"value": "vanarsdelltd/OnPremRentals/@{item().destination.fileName}"
+										}
+									],
+									"typeProperties": {
+										"source": {
+											"type": "SqlServerSource",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"validateDataConsistency": false
+									},
+									"inputs": [
+										{
+											"referenceName": "SourceDataset_ppm",
+											"type": "DatasetReference",
+											"parameters": {
+												"cw_table": "@item().source.table"
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DestinationDataset_ppm",
+											"type": "DatasetReference",
+											"parameters": {
+												"cw_fileName": "@item().destination.fileName"
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"cw_items": {
+						"type": "Array",
+						"defaultValue": [
+							{
+								"source": {
+									"table": "Actors"
+								},
+								"destination": {
+									"fileName": "dboActors.parquet"
+								}
+							},
+							{
+								"source": {
+									"table": "Customers"
+								},
+								"destination": {
+									"fileName": "dboCustomers.parquet"
+								}
+							},
+							{
+								"source": {
+									"table": "MovieActors"
+								},
+								"destination": {
+									"fileName": "dboMovieActors.parquet"
+								}
+							},
+							{
+								"source": {
+									"table": "Movies"
+								},
+								"destination": {
+									"fileName": "dboMovies.parquet"
+								}
+							},
+							{
+								"source": {
+									"table": "OnlineMovieMappings"
+								},
+								"destination": {
+									"fileName": "dboOnlineMovieMappings.parquet"
+								}
+							},
+							{
+								"source": {
+									"table": "Transactions"
+								},
+								"destination": {
+									"fileName": "dboTransactions.parquet"
+								}
+							}
+						]
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_ppm')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyRentalsFromFourthCoffee')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_ehz",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "/"
+							},
+							{
+								"name": "Destination",
+								"value": "fourthcoffee/Rentals/"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "FileServerReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings",
+									"skipLineCount": 0
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_ehz",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_ehz",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_ehz')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SouthridgeCloudStreamingTransactionsPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SouthridgeCloudStreamingTransactionsDataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SouthridgeCloudStreamingTransactionsDataFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "tinogen2storageaccConnection",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "SouthridgeCloudStreamingTransactionsPipelineStaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/SouthridgeCloudStreamingTransactionsDataFlow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Trigger_ehz')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyRentalsFromFourthCoffee",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 5,
+						"startTime": "2022-02-16T16:43:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyRentalsFromFourthCoffee')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Trigger_ppm')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -38,7 +643,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyOnPremRentalsFromVanArsdelLtd')]"
+			]
 		}
 	]
 }

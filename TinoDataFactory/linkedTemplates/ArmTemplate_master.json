@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'FourthCoffeeConnection'"
 		},
+		"TinoSynapseAnalyticsConnection_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'TinoSynapseAnalyticsConnection'"
+		},
 		"VanArsdelLtdSqlServerConnection_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'VanArsdelLtdSqlServerConnection'"
@@ -71,6 +75,9 @@
 					},
 					"CloudStreamingSqlDatabase_connectionString": {
 						"value": "[parameters('CloudStreamingSqlDatabase_connectionString')]"
+					},
+					"TinoSynapseAnalyticsConnection_connectionString": {
+						"value": "[parameters('TinoSynapseAnalyticsConnection_connectionString')]"
 					},
 					"tinogen2storageaccConnection_accountKey": {
 						"value": "[parameters('tinogen2storageaccConnection_accountKey')]"

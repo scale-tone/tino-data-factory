@@ -14,6 +14,9 @@
 		"FourthCoffeeConnection_password": {
 			"value": ""
 		},
+		"TinoSynapseAnalyticsConnection_connectionString": {
+			"value": ""
+		},
 		"VanArsdelLtdSqlServerConnection_connectionString": {
 			"value": ""
 		},
