@@ -2,7 +2,7 @@
 	"name": "CreateStreamingTable",
 	"properties": {
 		"content": {
-			"query": "CREATE TABLE [tino].[Streaming]\n(\n    UniqueOrderID NVARCHAR,\n    UniqueMovieID NVARCHAR,\n    UniqueCustomerID NVARCHAR,\n\n    SourceID NVARCHAR,\n    TransactionID NVARCHAR NULL,\n    MovieID NVARCHAR,\n    CustomerID NVARCHAR,\n\n    StreamStart DATETIME NULL,\n    StreamEnd DATETIME NULL\n)\nWITH\n(\n    DISTRIBUTION = HASH (UniqueOrderID),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n",
+			"query": "CREATE TABLE [tino].[Streaming]\n(\n    UniqueOrderID NVARCHAR(256),\n    UniqueMovieID NVARCHAR(256),\n    UniqueCustomerID NVARCHAR(256),\n\n    SourceID NVARCHAR(256),\n    TransactionID NVARCHAR(256),\n    MovieID NVARCHAR(256),\n    CustomerID NVARCHAR(256),\n\n    StreamStart DATETIME NULL,\n    StreamEnd DATETIME NULL\n)\nWITH\n(\n    DISTRIBUTION = HASH (UniqueOrderID),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n",
 			"metadata": {
 				"language": "sql"
 			},
