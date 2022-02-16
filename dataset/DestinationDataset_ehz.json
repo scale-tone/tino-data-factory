@@ -1,0 +1,22 @@
+{
+	"name": "DestinationDataset_ehz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tinogen2storageaccConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Rentals",
+				"fileSystem": "fourthcoffee"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
