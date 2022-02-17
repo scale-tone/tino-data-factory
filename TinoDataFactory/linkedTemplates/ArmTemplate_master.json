@@ -85,9 +85,6 @@
 					"FourthCoffeeConnection_password": {
 						"value": "[parameters('FourthCoffeeConnection_password')]"
 					},
-					"VanArsdelLtdSqlServerConnection_connectionString": {
-						"value": "[parameters('VanArsdelLtdSqlServerConnection_connectionString')]"
-					},
 					"tinogen2storageaccConnection_properties_typeProperties_url": {
 						"value": "[parameters('tinogen2storageaccConnection_properties_typeProperties_url')]"
 					},
@@ -114,6 +111,9 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"VanArsdelLtdSqlServerConnection_connectionString": {
+						"value": "[parameters('VanArsdelLtdSqlServerConnection_connectionString')]"
 					}
 				}
 			},
