@@ -9,6 +9,12 @@
 					"referenceName": "CopyRentalsFromFourthCoffee",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "SouthridgeCloudSalesCustomersPipeline",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
