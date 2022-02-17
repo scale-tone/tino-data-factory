@@ -1,0 +1,12 @@
+{
+	"name": "SouthridgeCloudStreamingCustomersDataFlow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [],
+			"script": ""
+		}
+	}
+}
