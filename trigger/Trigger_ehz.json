@@ -15,6 +15,12 @@
 					"referenceName": "SouthridgeCloudSalesCustomersPipeline",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "FourthCoffeeCustomersPipeline",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
