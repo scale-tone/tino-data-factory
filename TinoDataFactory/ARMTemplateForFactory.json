@@ -667,6 +667,61 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SouthridgeCloudSalesCustomersPipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SouthridgeCloudSalesCustomersDataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SouthridgeCloudSalesCustomersDataFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"CustomersSource": {},
+									"AddressesSource": {},
+									"sink1": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "tinogen2storageaccConnection",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "SouthridgeCloudSalesCustomersStaging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/SouthridgeCloudSalesCustomersDataFlow')]",
+				"[concat(variables('factoryId'), '/linkedServices/tinogen2storageaccConnection')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SouthridgeCloudStreamingCustomersPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1643,6 +1698,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "SouthridgeCloudSalesCustomersPipeline",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -1656,7 +1718,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/CopyRentalsFromFourthCoffee')]"
+				"[concat(variables('factoryId'), '/pipelines/CopyRentalsFromFourthCoffee')]",
+				"[concat(variables('factoryId'), '/pipelines/SouthridgeCloudSalesCustomersPipeline')]"
 			]
 		},
 		{
@@ -1843,61 +1906,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SouthridgeCloudStreamingTransactionsCsv')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsTable1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SouthridgeCloudSalesCustomersPipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "SouthridgeCloudSalesCustomersDataFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "SouthridgeCloudSalesCustomersDataFlow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"CustomersSource": {},
-									"AddressesSource": {},
-									"sink1": {}
-								}
-							},
-							"staging": {
-								"linkedService": {
-									"referenceName": "tinogen2storageaccConnection",
-									"type": "LinkedServiceReference"
-								},
-								"folderPath": "SouthridgeCloudSalesCustomersStaging"
-							},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/SouthridgeCloudSalesCustomersDataFlow')]",
-				"[concat(variables('factoryId'), '/linkedServices/tinogen2storageaccConnection')]"
 			]
 		}
 	]
