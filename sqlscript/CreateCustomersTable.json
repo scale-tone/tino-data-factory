@@ -1,0 +1,17 @@
+{
+	"name": "CreateCustomersTable",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE [tino].[Customers]\n(\n    SourceID INT,\n\n    UniqueID NVARCHAR(256),\n\n    CustomerID NVARCHAR(256),\n\n    FirstName NVARCHAR(256),\n    LastName NVARCHAR(256),\n    PhoneNumber NVARCHAR(256),\n\n    AddressLine1 NVARCHAR(256),\n    AddressLine2 NVARCHAR(256),\n    City NVARCHAR(256),\n    State NVARCHAR(256),\n    ZipCode NVARCHAR(256),\n\n    CreatedDate DATETIME NULL,\n    UpdatedDate DATETIME NULL\n)\nWITH\n(\n    DISTRIBUTION = HASH (UniqueID),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "TinoDedicatedSqlPool",
+				"poolName": "TinoDedicatedSqlPool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
