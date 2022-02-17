@@ -9,25 +9,13 @@
 					"referenceName": "CopyRentalsFromFourthCoffee",
 					"type": "PipelineReference"
 				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "SouthridgeCloudSalesCustomersPipeline",
-					"type": "PipelineReference"
-				}
-			},
-			{
-				"pipelineReference": {
-					"referenceName": "FourthCoffeeCustomersPipeline",
-					"type": "PipelineReference"
-				}
 			}
 		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Minute",
-				"interval": 5,
+				"frequency": "Hour",
+				"interval": 2,
 				"startTime": "2022-02-16T16:43:00Z",
 				"timeZone": "UTC"
 			}
