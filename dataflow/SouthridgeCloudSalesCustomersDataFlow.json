@@ -10,11 +10,18 @@
 						"type": "DatasetReference"
 					},
 					"name": "CustomersSource"
+				},
+				{
+					"dataset": {
+						"referenceName": "CloudSalesAddresses",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
 			"transformations": [],
-			"script": "source(output(\n\t\tCustomerID as string,\n\t\tLastName as string,\n\t\tFirstName as string,\n\t\tPhoneNumber as string,\n\t\tCreatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS',\n\t\tUpdatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tskipLines: 1) ~> CustomersSource"
+			"script": "source(output(\n\t\tCustomerID as string,\n\t\tLastName as string,\n\t\tFirstName as string,\n\t\tPhoneNumber as string,\n\t\tCreatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS',\n\t\tUpdatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tskipLines: 1) ~> CustomersSource\nsource(output(\n\t\tAddressID as string,\n\t\tCustomerID as string,\n\t\tAddressLine1 as string,\n\t\tAddressLine2 as string,\n\t\tCity as string,\n\t\tState as string,\n\t\tZipCode as string,\n\t\tAddressCreatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS',\n\t\tAddressUpdatedDate as timestamp 'yyyy-MM-dd\\'T\\'HH:mm:ss.SSSSSSS'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tskipLines: 1) ~> source1"
 		}
 	}
 }
