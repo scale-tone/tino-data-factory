@@ -82,17 +82,8 @@
 					"tinogen2storageaccConnection_accountKey": {
 						"value": "[parameters('tinogen2storageaccConnection_accountKey')]"
 					},
-					"FourthCoffeeConnection_password": {
-						"value": "[parameters('FourthCoffeeConnection_password')]"
-					},
 					"tinogen2storageaccConnection_properties_typeProperties_url": {
 						"value": "[parameters('tinogen2storageaccConnection_properties_typeProperties_url')]"
-					},
-					"FourthCoffeeConnection_properties_typeProperties_host": {
-						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_host')]"
-					},
-					"FourthCoffeeConnection_properties_typeProperties_userId": {
-						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_userId')]"
 					}
 				}
 			},
@@ -112,8 +103,17 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"FourthCoffeeConnection_password": {
+						"value": "[parameters('FourthCoffeeConnection_password')]"
+					},
 					"VanArsdelLtdSqlServerConnection_connectionString": {
 						"value": "[parameters('VanArsdelLtdSqlServerConnection_connectionString')]"
+					},
+					"FourthCoffeeConnection_properties_typeProperties_host": {
+						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_host')]"
+					},
+					"FourthCoffeeConnection_properties_typeProperties_userId": {
+						"value": "[parameters('FourthCoffeeConnection_properties_typeProperties_userId')]"
 					}
 				}
 			},
